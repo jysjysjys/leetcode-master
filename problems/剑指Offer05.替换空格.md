@@ -15,7 +15,7 @@
 输入：s = "We are happy."    
 输出："We%20are%20happy."     
 
-# 思路
+## 思路
 
 如果想把这道题目做到极致，就不要只用额外的辅助空间了！
 
@@ -86,7 +86,7 @@ public:
 * [142.环形链表II](https://programmercarl.com/0142.环形链表II.html)
 * [344.反转字符串](https://programmercarl.com/0344.反转字符串.html)
 
-# 拓展
+## 拓展
 
 这里也给大家拓展一下字符串和数组有什么差别，
 
@@ -121,7 +121,8 @@ for (int i = 0; i < a.size(); i++) {
 
 ## 其他语言版本
 
-C：
+### C：
+
 ```C
 char* replaceSpace(char* s){
     //统计空格数量
@@ -152,8 +153,8 @@ char* replaceSpace(char* s){
 }
 ```
 
+### Java：
 
-Java：
 ```Java
 //使用一个新的对象，复制 str，复制的过程对其判断，是空格则替换，否则直接复制，类似于数组复制
 public static String replaceSpace(String s) {
@@ -211,8 +212,8 @@ public String replaceSpace(String s) {
 }
 ```
 
+### Go：
 
-Go：
 ```go
 // 遍历添加
 func replaceSpace(s string) string {
@@ -264,8 +265,11 @@ func replaceSpace(s string) string {
 
 
 
+### python：
 
-python：
+因为字符串是不可变类型，所以操作字符串需要将其转换为列表，因此空间复杂度不可能为O(1)
+
+（版本一）转换成列表，并且添加相匹配的空间，然后进行填充
 ```python
 class Solution:
     def replaceSpace(self, s: str) -> str:
@@ -290,14 +294,22 @@ class Solution:
         return ''.join(res)
             
 ```
-
+（版本二）添加空列表，添加匹配的结果
 ```python
 class Solution:
     def replaceSpace(self, s: str) -> str:
-        # method 1 - Very rude
-        return "%20".join(s.split(" "))
-
-        # method 2 - Reverse the s when counting in for loop, then update from the end.
+        res = []
+        for i in range(len(s)):
+            if s[i] == ' ':
+                res.append('%20')
+            else:
+                res.append(s[i])
+        return ''.join(res)
+```
+（版本三）使用切片
+```python
+class Solution:
+    def replaceSpace(self, s: str) -> str:
         n = len(s)
         for e, i in enumerate(s[::-1]):
             print(i, e)
@@ -306,8 +318,19 @@ class Solution:
             print("")
         return s
 ```
-
-javaScript:
+（版本四）使用join + split
+```python
+class Solution:
+    def replaceSpace(self, s: str) -> str:
+        return "%20".join(s.split(" "))
+```
+（版本五）使用replace
+```python
+class Solution:
+    def replaceSpace(self, s: str) -> str:
+        return s.replace(' ', '%20')
+```
+### JavaScript:
 
 ```js
 /**
@@ -345,7 +368,7 @@ javaScript:
 };
 ```
 
-TypeScript：
+### TypeScript：
 
 ```typescript
 function replaceSpace(s: string): string {
@@ -372,7 +395,7 @@ function replaceSpace(s: string): string {
 };
 ```
 
-Swift:
+### Swift:
 
 ```swift
 func replaceSpace(_ s: String) -> String {
@@ -413,7 +436,7 @@ func replaceSpace(_ s: String) -> String {
 }
 ```
 
-Scala:
+### Scala:
 
 方式一: 双指针
 ```scala
@@ -470,8 +493,8 @@ object Solution {
   }
 ```
 
+### PHP：
 
-PHP：
 ```php
 function replaceSpace($s){
     $sLen = strlen($s);
@@ -506,7 +529,7 @@ function spaceLen($s){
 }
 ```
 
-Rust
+### Rust:
 
 ```Rust
 impl Solution {
@@ -542,3 +565,4 @@ impl Solution {
 <a href="https://programmercarl.com/other/kstar.html" target="_blank">
   <img src="../pics/网站星球宣传海报.jpg" width="1000"/>
 </a>
+
